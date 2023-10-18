@@ -2,13 +2,18 @@
   "todos": [
     {
       "title": "buy snacks",
-      "completed": false,
+      "completed": true,
       "id": 8
     },
     {
       "title": "Work on labs",
-      "completed": false,
+      "completed": true,
       "id": 9
+    },
+    {
+      "title": "Go to the gym",
+      "completed": false,
+      "id": 10
     }
   ]
 }
