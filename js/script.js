@@ -3,13 +3,34 @@ document.addEventListener('DOMContentLoaded', ()=>{
   let todoList = document.querySelector('.todo-list');
 
   const createListItem = (todoObj) => {
-    let listItem = document.createElement('li');
-    listItem.innerText = todoObj.title;
-    todoObj.completed ? listItem.style.textDecoration = "line-through" : listItem.style.textDecoration = "none";
+    // Create the elements making up a todo item
+    const listItem = document.createElement('li');
+    const todoTitle = document.createElement('span');
+    const deleteButton = document.createElement('button');
+
+    // Add classes to elements for styling
+    listItem.classList.add("todo-list__item");
+    todoTitle.classList.add("todo-list__item__title");
+
+    todoTitle.innerText = todoObj.title;
+
+    deleteButton.classList.add("button");
+    deleteButton.classList.add("button--todo");
+    deleteButton.classList.add("button--delete");
+    deleteButton.innerText = "Delete";
+
+    // Add elements to listItem
+    listItem.appendChild(todoTitle);
+    listItem.appendChild(deleteButton);
+
+    if(todoObj.completed) todoTitle.style.textDecoration = "line-through";
+
+    // Add the list item to the todo-list on the DOM
     todoList.appendChild(listItem);
-    // Add a click event listener to list item
-    listItem.addEventListener("click", () => {
-      listItem.style.textDecoration = "line-through";
+
+    // Add a click event listener to todoTitle
+    todoTitle.addEventListener("click", () => {
+      todoTitle.style.textDecoration = "line-through";
 
       fetch(`http://127.0.0.1:3000/todos/${todoObj.id}`, {
         method: "PATCH",
@@ -22,6 +43,9 @@ document.addEventListener('DOMContentLoaded', ()=>{
         })
       })
     });
+
+    // Add event listener to the deleteButton
+
   }
 
   // GET - Read
